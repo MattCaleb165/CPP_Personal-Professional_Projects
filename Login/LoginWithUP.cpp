@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <math.h>
 
 using namespace std;
 
@@ -15,35 +16,26 @@ class LoginManager
         }
         void login() 
         {
-        string Username = "nothing";
-        string Password = "nothing";
-
             cout << "Enter username and password.\nUsername: ";
             cin >> UsernameAttempt;
-            Username = getFile("users.dat");
+            
+            
 
-            if(UsernameAttempt == Username) 
+            if(checkFile(UsernameAttempt, "users.dat")) 
             {
-                while (PasswordAttempt != Password) 
-                {
                 cout << "Password: ";
                 cin >> PasswordAttempt;
 
-                Password = getFile("pswds.dat");
-
-                    if (PasswordAttempt == Password)
-                    {
-                        cout << "Successfully authenticated.";
-                        cin.get();
-                        break;
-                    }
-                    else
-                    {
-                        system("CLS");
-                        cout << "\n\nIncorrect Password. Try again.\n\n";
-                        login();
-                    }
-                }                
+                if (checkFile(PasswordAttempt, "pswds.dat"))
+                {
+                    cout << "Successfully authenticated. \n" << endl;
+                }
+                else
+                {
+                    system("CLS");
+                    cout << "\n\nIncorrect Password. Try again.\n\n";
+                    login();
+                }               
             }
             else
             {
@@ -52,30 +44,66 @@ class LoginManager
                 login();
             }
         }
-    string getFile(const char* p_FileName) 
+    bool checkFile(string attempt, const char* p_FileName) 
     {
         string line;
         fstream file;
 
+        long long encryptChar;
+
         file.open(p_FileName, ios::in);
-        if (file.is_open())
-        {
-            getline(file, line);
-        }
         
+        while(1)
+        {
+            file >> encryptChar;
+            if (encryptChar == 0)
+            {
+                if(attempt == line)
+                {
+                    file.close();
+                    return true;
+                }
+                else
+                { 
+                    line.erase(line.begin(), line.end());
+                }
+            }
+            else
+            {
+                line += (char)decrypt(encryptChar);
+            }
+
+            if (file.peek() == EOF)
+            {
+                file.close();
+                return false;
+            }
+        }
+    }
+
+    void SaveFile(string p_Line, const char* p_FileName) 
+    {
+        fstream file;
+        file.open(p_FileName, ios::app);
+
+        for (int i = 0; i < p_Line.length(); i++)
+        {
+            file << encrypt(p_Line[i]);
+            file << "\n";
+        }
+
+        file << "0 \n";
         file.close();
-
-        return line;
     }
 
-    int encrypt(int p_Letter) 
+    long long encrypt(int p_Letter) 
     {
-        return p_Letter + 3;
+        return powf(p_Letter, 5) * 4 - 14;
     }
 
-    int decrypt(int p_Letter)
+    int decrypt(long long p_Letter)
     {
-        return p_Letter -3;
+        return powf((p_Letter + 14) / 4, 1/5.f);
     }
 
     private:
@@ -87,7 +115,10 @@ class LoginManager
 void main() 
 {
 
-    LoginManager loginManagerObj;
-    loginManagerObj.login();
+    LoginManager app;
+    app.SaveFile("guest", "users.dat");
+    app.SaveFile("guest", "pswds.dat");
+    app.login();
 
+    cin.get();
 }
