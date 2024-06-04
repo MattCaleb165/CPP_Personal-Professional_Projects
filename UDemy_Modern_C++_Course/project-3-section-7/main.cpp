@@ -1,49 +1,77 @@
-//Vectors
-//vector <char> vowels {'a', 'e', 'o'}
-//vector <int> name {100, 98}
-//vector <double> name {300, 98.0}
+/*  Section 7
+    Challenge
+    
+    Write a C++ program as follows:
+    
+    Declare 2 empty vectors of integers named
+    vector1 and vector 2, respectively.
+    
+    Add 10 and 20 to vector1 dynamically using push_back
+    Display the elements in vector1 using the at() method as well as its size using the size() method
+    
+    Add 100 and 200 to vector2 dynamically using push_back
+    Display the elements in vector2 using the at() method as well as its size using the size() method
 
-//Vectors are dynamic in size
-//Elements are all the same size
-//All elements in vector are initialized to 0 by default
-//Same syntax as arrays for accessing the info; no bounds checking is done when using the same as array
-
-//vector_name.at(element_index) - bounds checking
-//Exampe: test_score.at(1)
-
-//Vector has a method called "push_back" that adds an element at the end of the vector
-//example: test_score.push_back(90); - adds "90" to the end of the vector
-
-//If you go out of bounds, c++ will show an error message about it
-
+    Declare an empty 2D vector called vector_2d
+    Remember, that a 2D vector is a vector of vector<int>
+    
+    Add vector1 to vector_2d dynamically using push_back
+    Add vector2 to vector_2d dynamically using push_back
+    
+    Display the elements in vector_2d using the at() method
+    
+    Change vector1.at(0) to 1000
+    
+    Display the elements in vector_2d again using the at() method
+    
+    Display the elements in vector1 
+    
+    What did you expect? Did you get what you expected? What do you think happended?
+*/
+    
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
 int main() {
-  vector <char> vowels {'a', 'e', 'i', 'o', 'u'};
+    
+    // your solution goes here
+    vector <int> vector1 {};
+    vector <int> vector2 {};
 
-  cout << vowels[0] << endl;
-  cout << vowels[4] << endl;
+    vector1.push_back(10);
+    vector1.push_back(20);
 
-  // vector <int> test_scores (3); // 3 elements all initialized to zero
-  // vector <int> test_scores (3, 100); // 3 elements all initialized to 100
+    cout << vector1.at(0) << endl;
+    cout << vector1.at(1) << endl;
+    cout << "Vector1 has " << vector1.size() << " items." << endl;
 
-  vector <int> test_scores {100, 98, 89};
+    vector2.push_back(100);
+    vector2.push_back(200);
 
-  //Array syntax example to show vector interactions
-  cout << "\nTest scores using array syntax:" << endl;
-  cout << test_scores[0] << endl;
-  cout << test_scores[1] << endl;
-  cout << test_scores[2] << endl;
-  cout << endl;
+    cout << vector2.at(0) << endl;
+    cout << vector2.at(1) << endl;
+    cout << "Vector2 has " << vector2.size() << " items." << endl;
+
+    vector <vector<int>> vector_2d {};
+
+    vector_2d.push_back(vector1);
+    vector_2d.push_back(vector2);
+
+    cout << "\n" << vector_2d.at(0).at(0) << "  " << vector_2d.at(0).at(1) << endl;
+    cout << vector_2d.at(1).at(0) << "  " << vector_2d.at(1).at(1) << endl;
+
+    vector1.at(0) = 1000;
+
+    cout << "\n" << vector_2d.at(0).at(0) << "  " << vector_2d.at(0).at(1) << endl;
+    cout << vector_2d.at(1).at(0) << "  " << vector_2d.at(1).at(1) << endl;
 
 
-  //True vector synax using the appropriate method
-  cout << test_scores.at(0) << endl;
-  cout << test_scores.at(1) << endl;
-  cout << test_scores.at(2) << endl;
-  cout << "\nThere are " << test_scores.size() << " scores in the vector" << endl;
+    cout << "\n" << vector1.at(0) << endl;
+    cout << vector1.at(1) << endl;
 
+    cout << endl;
+    return 0;
 }
+
