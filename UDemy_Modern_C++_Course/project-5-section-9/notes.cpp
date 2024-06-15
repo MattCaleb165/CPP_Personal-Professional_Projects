@@ -42,7 +42,7 @@
 //     double area {width * height};
 //     cout << "the area is " << area << endl;
 
-//     cout << "Calculate anaother? (Y/N): ";
+//     cout << "Calculate another? (Y/N): ";
 //     cin >> selection;
 //   } while (selection == 'Y' || selection == 'y');
 //   cout << "Thanks!" << endl;
@@ -114,34 +114,56 @@
 // }
 
 //Histogram Example
-#include <iostream>
-#include <vector>
+// #include <iostream>
+// #include <vector>
 
-using namespace std;
+// using namespace std;
 
-int main() {
+// int main() {
     
-    int num_items{};
+//     int num_items{};
     
-    cout << "How many data items do you have? ";
-    cin >> num_items;
+//     cout << "How many data items do you have? ";
+//     cin >> num_items;
     
-    vector <int> data {};
+//     vector <int> data {};
     
-    for (int i{1}; i <= num_items; ++i) {
-        int data_item{};
-        cout << "Enter data item " << i << ": ";
-        cin >> data_item;
-        data.push_back(data_item);
-    }
-    cout << "\nDisplaying Histogram" << endl;
-    for (auto val : data) {
-        for (int i{1}; i<=val; ++i) {
-            cout << "-";
-        }
-        cout << endl;
-    }
+//     for (int i{1}; i <= num_items; ++i) {
+//         int data_item{};
+//         cout << "Enter data item " << i << ": ";
+//         cin >> data_item;
+//         data.push_back(data_item);
+//     }
+//     cout << "\nDisplaying Histogram" << endl;
+//     for (auto val : data) {
+//         for (int i{1}; i<=val; ++i) {
+//             cout << "-";
+//         }
+//         cout << endl;
+//     }
     
-    cout << endl;
-    return 0;
-}
+//     cout << endl;
+//     return 0;
+// }
+
+// Challenge question solution
+// #include <vector>
+// using namespace std;
+
+// int calculate_pairs(vector<int> vec) {
+//     //----WRITE YOUR CODE BELOW THIS LINE----
+    
+//     int result = 0;
+//     int vec_size = vec.size();
+    
+//     for (int i = 0; i < (vec_size-1); i++) {
+//         for (int j = i + 1; j < vec_size; j++) {
+//             cout << vec.at(i) << " * " << vec.at(j) << endl;
+//             result = result + (vec.at(i) * vec.at(j));
+//         };
+//     };
+     
+//     //----WRITE YOUR CODE ABOVE THIS LINE----
+//     //----DO NOT MODIFY THE CODE BELOW THIS LINE----
+//     return result;
+// }
