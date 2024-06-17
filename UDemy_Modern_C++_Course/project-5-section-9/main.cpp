@@ -78,6 +78,7 @@ int main() {
 
     do {
         int vec_size = vector1.size();
+        //Display menu
         cout << "P - Print numbers\nA - Add a number\nM - Display mean of the numbers\nS - Display the smallest number\nL - Display the largest number\nQ - Quit\n\nEnter your choice: ";
         cin >> user_input;
         
