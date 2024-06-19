@@ -38,46 +38,56 @@ int main() {
     string secret_message;
     string encrypted_message;
     
-    string alphabet {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
-    string key  {"XZNLWEBGJHQDYVTKFUOMPCIASRxznlwebgjhqdyvtkfuompciasr"};
+    string alphabet {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"};
+    string key  {"X0ZNLW7EBGJHQD6YVTKFUOMP8CIASR xzn1lwe2bgj4hqd3yvt5kfuompcias9r"};
     
     cout << "State your secret message: ";
-    cin >> secret_message;
+    getline(cin, secret_message);
     
     string answer;
     cout << "\n\nDo you want to encrypt your secret message? (Y/N) ";
     cin >> answer;
     
-    if (answer == "Y" || answer == "y")
-        for (int letter_pos : secret_message) {
-            size_t alpha_position = alphabet.find(letter_pos);
-            auto key_position = key.at(alpha_position);
-            encrypted_message += key_position;
+    if (answer == "Y" || answer == "y") {
+        for (char letter : secret_message) {
+            size_t alpha_position = alphabet.find(letter);
+            if (alpha_position != string::npos) {
+                char key_char = key.at(alpha_position);
+                encrypted_message += key_char;
+            } else {
+                // If the character is not found in the alphabet, add it as is
+                encrypted_message += letter;
+            }
         }
-    else
+    } else {
         cout << "Your message isn't going to be very secret...";
+    }
     
     secret_message.erase();
     
     cout << "\n" << encrypted_message << endl;
     
-    // cout << "\n" << "The new secret message is: " << secret_message << endl;
-    
     cout << "\n" << "Do you want to decrypt your message now? (Y/N) ";
-    
     cin >> answer;
     
-    if (answer == "Y" || answer == "y")
-        for (int encrypt_letter_pos : encrypted_message) {
-            size_t key_position = key.find(encrypt_letter_pos);
-            auto alpha_position = alphabet.at(key_position);
-            secret_message += alpha_position;
+    if (answer == "Y" || answer == "y") {
+        for (char encrypted_letter : encrypted_message) {
+            size_t key_position = key.find(encrypted_letter);
+            if (key_position != string::npos) {
+                char alpha_char = alphabet.at(key_position);
+                secret_message += alpha_char;
+            } else {
+                // If the character is not found in the key, add it as is
+                secret_message += encrypted_letter;
+            }
         }
-    else
+    } else {
         cout << "Your message isn't going to be very secret...";
+    }
     
     cout << "\n" << secret_message << endl;
     cout << endl;
     return 0;
 }
+
 
