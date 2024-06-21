@@ -167,3 +167,17 @@
 //     //----DO NOT MODIFY THE CODE BELOW THIS LINE----
 //     return result;
 // }
+
+using namespace std;
+int main() {
+
+int count = 0;
+int i;
+int j;
+
+cout << i;
+
+//after that
+cout << i << i+count << i
+}
+
